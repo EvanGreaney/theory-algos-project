@@ -2,12 +2,13 @@
 
 void bin_print(unsigned int i){
     // Number of bits in an Integer
-    int j = (sizeof(unsigned int)*8)-1;
+    int j = sizeof(unsigned int)*8;
     //Temporary variable
     int k;
     // Loop over the number of bits in i.
     for (j--; j >= 0; j--)
     {
+        //Pick out the jth bit of i, left to right.
         k= ((1 << j) & i) ? 1 : 0;
         //print k;
         printf("%d",k);
@@ -19,7 +20,7 @@ void bin_print(unsigned int i){
 
 int main(int argc, char *argv[]){
     //Set i to literal value
-    unsigned int i = 4294967295;
+    unsigned int i = 0x0f0f0f0f;
     //What we're Printing
     printf("Original:  ");
     //Print i in binary
@@ -27,14 +28,18 @@ int main(int argc, char *argv[]){
     // End Line
     printf("\t%x\t%u\n",i , i);
 
-    for ( int j = 0; j < 40; j++)
+    //32
+    int j = sizeof(unsigned int)*8;
+
+    for ( j--; j>=0; j--)
     {
-        //what the operation is
-        printf("%3u << %2d: ",i,j);
-        //i shifted left j times
-        bin_print(i << j);
-        //End Line
-        printf("\n");
+        // i shifted j times
+        bin_print(1 << j); printf("\n");
+        // i
+        bin_print(i); printf("\n");
+        printf("------------------------------&\n");
+        // (1 shifted left j times and i) bitwise logical and i
+        bin_print(((i << j) & i)); printf("\n\n");
     }
     
 
