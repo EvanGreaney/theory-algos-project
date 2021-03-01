@@ -19,6 +19,11 @@ void bin_print(unsigned int i){
 }
 
 int main(int argc, char *argv[]){
+    for(int i =0; i < argc; i++){
+        printf("%s\n",argv[i]);
+    }
+    return 0;
+
     //Set i to literal value
     unsigned int i = 0x0f0f0f0f;
     //What we're Printing
