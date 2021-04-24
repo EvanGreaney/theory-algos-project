@@ -131,7 +131,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) {
 int next_hash(union Block *M, WORD H[]) {
   
     // Message schedule, Section 6.2.2
-    WORD W[64];
+    WORD W[128];
     // Iterator.
     int t;
     // Temporary variables.
@@ -140,7 +140,7 @@ int next_hash(union Block *M, WORD H[]) {
     // Section 6.2.2, part 1.
     for (t = 0; t < 16; t++)
         W[t] = M->words[t];
-    for (t = 16; t < 64; t++)
+    for (t = 16; t < 80; t++)
         W[t] = Sig1(W[t-2]) + W[t-7] + Sig0(W[t-15]) + W[t-16];
 
     // Section 6.2.2, part 2.
@@ -148,7 +148,7 @@ int next_hash(union Block *M, WORD H[]) {
     e = H[4]; f = H[5]; g = H[6]; h = H[7];
 
     // Section 6.2.2, part 3.
-    for (t = 0; t < 64; t++) {
+    for (t = 0; t < 80; t++) {
         T1 = h + SIG1(e) + CH(e, f, g) + K[t] + W[t];
         T2 = SIG0(a) + MAJ(a, b, c);
         h = g; g = f; f = e; e = d + T1; d = c; c = b; b = a; a = T1 + T2;
@@ -186,8 +186,10 @@ int sha512(FILE *f, WORD H[]) {
 int main(int argc, char *argv[]) {
     // Section 5.3.4
     WORD H[] = {
-        0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-        0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+       0x6a09e667f3bcc908, 0xbb67ae8584caa73b,
+       0x3c6ef372fe94f82b,0xa54ff53a5f1d36f1,
+       0x510e527fade682d1,0x9b05688c2b3e6c1f,
+       0x1f83d9abfb41bd6b,0x5be0cd19137e2179
     };
 
     // File pointer for reading.
@@ -200,7 +202,7 @@ int main(int argc, char *argv[]) {
 
     // Print the final SHA256 hash.
     for (int i = 0; i < 8; i++)
-        printf("%08" PF, H[i]);
+        printf("%016" PF, H[i]);
     printf("\n");
 
     // Close the file.
