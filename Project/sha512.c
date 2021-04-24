@@ -25,7 +25,7 @@ const int _i = 1;
 #define Sig1(_x) (ROTR(_x,19) ^ ROTR(_x,61) ^ SHR(_x,6))
 
 
-// SHA512 works on blocks of 1024 bits.
+// SHA256 works on blocks of 512 bits.
 union Block {
     // 8 x 64 = 512 - dealing with block as bytes.
     BYTE bytes[128];
@@ -76,19 +76,19 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) {
         return 0;
     } else if (*S == READ) {
         // Try to read 64 bytes from the input file.
-        nobytes = fread(M->bytes, 1, 64, f);
+        nobytes = fread(M->bytes, 1, 128, f);
         // Calculate the total bits read so far.
         *nobits = *nobits + (8 * nobytes);
         // Enough room for padding.
-        if (nobytes == 64) {
+        if (nobytes == 128) {
             // This happens when we can read 64 bytes from f.
             // Do nothing.
-        } else if (nobytes < 56) {
+        } else if (nobytes < 112) {
             // This happens when we have enough roof for all the padding.
             // Append a 1 bit (and seven 0 bits to make a full byte).
             M->bytes[nobytes] = 0x80; // In bits: 10000000.
             // Append enough 0 bits, leaving 64 at the end.
-            for (nobytes++; nobytes < 56; nobytes++) {
+            for (nobytes++; nobytes < 112; nobytes++) {
                 M->bytes[nobytes] = 0x00; // In bits: 00000000
             }
             // Append nobits as a big endian integer.
@@ -101,7 +101,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) {
             // Append a 1 bit (and seven 0 bits to make a full byte.)
             M->bytes[nobytes] = 0x80;
             // Append 0 bits.
-            for (nobytes++; nobytes < 64; nobytes++) {
+            for (nobytes++; nobytes < 128; nobytes++) {
                  // Error: trying to write to 
                 M->bytes[nobytes] = 0x00; // In bits: 00000000
             }
@@ -110,7 +110,7 @@ int next_block(FILE *f, union Block *M, enum Status *S, uint64_t *nobits) {
         }
     } else if (*S == PAD) {
         // Append 0 bits.
-        for (nobytes = 0; nobytes < 56; nobytes++) {
+        for (nobytes = 0; nobytes < 112; nobytes++) {
             M->bytes[nobytes] = 0x00; // In bits: 00000000
         }
         // Append nobits as a big endian integer.
@@ -148,7 +148,7 @@ int next_hash(union Block *M, WORD H[]) {
     e = H[4]; f = H[5]; g = H[6]; h = H[7];
 
     // Section 6.2.2, part 3.
-    for (t = 0; t < 80; t++) {
+    for (t = 0; t < 64; t++) {
         T1 = h + SIG1(e) + CH(e, f, g) + K[t] + W[t];
         T2 = SIG0(a) + MAJ(a, b, c);
         h = g; g = f; f = e; e = d + T1; d = c; c = b; b = a; a = T1 + T2;
@@ -186,8 +186,8 @@ int sha512(FILE *f, WORD H[]) {
 int main(int argc, char *argv[]) {
     // Section 5.3.4
     WORD H[] = {
-          0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-          0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
+        0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
+        0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
     };
 
     // File pointer for reading.
