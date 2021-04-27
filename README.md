@@ -41,9 +41,18 @@ The algorithm then puts the block through a series of what is called "Rounds" or
 <h3>Output</h3>
 Once the final block has finished with the Message processing phase , the last 512 bit Hash Value belonging to the last 1024 bit block becomes the final hash value of the original message
 
+<h2>Why can't we reverse the SHA512 algorithm to retrieve the original message from a hash digest?</h2>
+
+THe reason why we cant reverse the SHA 512 is because "for each input you have exactly one output, but not the other way around. There are multiple inputs that yields the same output."[5] When taken into consideration for hash values ,there are so many inputs if not an infinite number of inputs that can result in the same output but if we try to reverse the output based on only knowing the output hash value , how can you find the exact inputs used to create that output.
+<br>
+its like having a maths equation like 50%11 = 6, based on the input given we are given the output of 6 but if you tried to reverse that but only knowing the output of 6, one would have to brute force and try every possible way of reversing the outcome of 6 to get the exact same inputs once more.
+
+
 
 <h2>References</h2>
 1.	Ahmad, I. and Das, A.S., 2007. Analysis and detection of errors in implementation of SHA-512 algorithms on FPGAs. The computer journal, 50(6), pp.728-738<br>
 2.	https://medium.com/@zaid960928/cryptography-explaining-sha-512-ad896365a0c1<br>
 3.	Dang, Q. (2015), Secure Hash Standard, Federal Inf. Process. Stds. (NIST FIPS), National Institute of Standards and Technology, Gaithersburg, MD, [online],           https://doi.org/10.6028/NIST.FIPS.180-4 (Accessed April 23, 2021)<br>
 4.	http://www.uietkanpur.com/Online_Course/SA_CSE_S510.pdf
+5.	https://stackoverflow.com/questions/47017606/is-hashing-really-a-irreversible-process
+6.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
