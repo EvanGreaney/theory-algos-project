@@ -33,9 +33,13 @@ Fig 1.3 [2]
 <h3>Message Processing</h3>
 Once the message has been padded and parsed with the inital hash value being set, the next stage is to process the message. It does this by taking each block of 1024 bits and the result of the previous block, one at a time. "The Message block (1024 bit) is expanded out into ‘Words’ using a ‘message sequencer’. Eighty Words to be precise, each of them having a size of 64 bits." [2]<br>
 The algorithm then puts the block through a series of what is called "Rounds" or Round Functions as described in Fig 1.4. These rounds require three items before the message can be processed, one "Word", the output of the previous round and a SHA512 constant as seen in Fig 1.2. It uses these items and then processes them and creates a output of 512 bits. This is then repeated for 80 rounds and then the output of the round is then added to the result of the previous block to get the final result for the output to for the message processing
+<br>
 
 ![image](https://user-images.githubusercontent.com/37175022/115973689-ebfa1780-a54e-11eb-8d02-4e6de3567787.png) 
 <br> Fig 1.4 [4]
+
+<h3>Output</h3>
+Once the final block has finished with the Message processing phase , the last 512 bit Hash Value belonging to the last 1024 bit block becomes the final hash value of the original message
 
 
 <h2>References</h2>
