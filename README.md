@@ -46,6 +46,10 @@ Once the final block has finished with the Message processing phase , the last 5
 THe reason why we cant reverse the SHA 512 is because "for each input you have exactly one output, but not the other way around. There are multiple inputs that yields the same output."[5] When taken into consideration for hash values ,there are so many inputs if not an infinite number of inputs that can result in the same output but if we try to reverse the output based on only knowing the output hash value , how can you find the exact inputs used to create that output.
 <br>
 its like having a maths equation like 50%11 = 6, based on the input given we are given the output of 6 but if you tried to reverse that but only knowing the output of 6, one would have to brute force and try every possible way of reversing the outcome of 6 to get the exact same inputs once more.
+<br>
+To try a brute force reverse the SHA512 hash digest, one would have to find a collison in the hash algorithm, which would mean we dont need the original message just the  "output of the hash function that is equal to the hash of a valid password".[7] We could then try to find a collision using a "birthday attack" [8] with the formula "O(2^(n/2)) where n is the output length of the hash function in bits"[7] This calucaltes the length of time needed to perform the birtdhay attack. 
+<br>
+For a SHA 512 digest the time it would take to reverse the algorithm would take O(2^256) time using a birthday attack, which is similar to the rough estimate to the amount of atoms in observalbe universe which is roughly between  10^78 and 10^82 or 2^266[7][9]. The age of the universe is roughly 13.77*10^9 so this would make the time neccessary to brute force the SHA512 Algorithm longer than the current age of the universe.
 
 
 
@@ -56,3 +60,6 @@ its like having a maths equation like 50%11 = 6, based on the input given we are
 4.	http://www.uietkanpur.com/Online_Course/SA_CSE_S510.pdf
 5.	https://stackoverflow.com/questions/47017606/is-hashing-really-a-irreversible-process
 6.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
+7.	https://stackoverflow.com/questions/6776050/how-long-to-brute-force-a-salted-sha-512-hash-salt-provided
+8.	https://en.wikipedia.org/wiki/Birthday_attack
+9.	https://www.universetoday.com/36302/atoms-in-the-universe/#:~:text=At%20this%20level%2C%20it%20is,hundred%20thousand%20quadrillion%20vigintillion%20atoms.
