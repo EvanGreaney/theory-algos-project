@@ -51,6 +51,11 @@ To try a brute force reverse the SHA512 hash digest, one would have to find a co
 <br>
 For a SHA 512 digest the time it would take to reverse the algorithm would take O(2^256) time using a birthday attack, which is similar to the rough estimate to the amount of atoms in observalbe universe which is roughly between  10^78 and 10^82 or 2^266[7][9]. The age of the universe is roughly 13.77*10^9 so this would make the time neccessary to brute force the SHA512 Algorithm longer than the current age of the universe.
 
+<h2>Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?</h2>
+
+In theory, relative to how much time it would take it is entirely possible given enough enough to find the input messages of all the possible 512-bit strings but the amount of time it will take to find the input is so high that it is not feasable currently to find all these inputs.
+
+As SHA512 is a hashing algorithm and uses multiple one-way operations sequentially with the results from the earlier operations being used in later operations[10] and when you try to reverse it to get the  
 
 
 <h2>References</h2>
@@ -63,3 +68,4 @@ For a SHA 512 digest the time it would take to reverse the algorithm would take 
 7.	https://stackoverflow.com/questions/6776050/how-long-to-brute-force-a-salted-sha-512-hash-salt-provided
 8.	https://en.wikipedia.org/wiki/Birthday_attack
 9.	https://www.universetoday.com/36302/atoms-in-the-universe/#:~:text=At%20this%20level%2C%20it%20is,hundred%20thousand%20quadrillion%20vigintillion%20atoms.
+10.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
