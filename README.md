@@ -19,6 +19,10 @@ When the input message is taken in, padding is appended to the message to format
 It does this by appending bits to the message in order to get the desired length. It uses bits of '0' that are lead by a '1'. Padding is required
 and if a message only needs '1' bit of Padding, it will still be appended.
 
+<h3> Padding Size </h3>
+After the original message has been appended, the message has to be reperesented in 128 bits, this is because SHA512 can only accept 128bit messages as its input message. Although it has a lmilation on the input size of the message, the number is so large it doesnt cause any issue. The largest number can be represented as (2^128)-1 as the largest input message or if including the single paddit bit it would be (2^128)-2 which would equal: 340,282,366,920,938,463,463,374,607,431,768,211,454 bits in length.[2]
+
+
 <h4>Hash Buffer Initialization</h4>
 The next step is the Hash Buffer initialization, as the algorithm processes each block of 1024 bits from the input message using the result 
 from the previous block , it can cause a problem with the very first 1024 bit block as there is no block prior to it that was processed, 
@@ -53,9 +57,15 @@ For a SHA 512 digest the time it would take to reverse the algorithm would take 
 
 <h2>Can you design an algorithm that, given enough time, will find input messages that give each of the possible 512-bit strings?</h2>
 
-In theory, relative to how much time it would take it is entirely possible given enough enough to find the input messages of all the possible 512-bit strings but the amount of time it will take to find the input is so high that it is not feasable currently to find all these inputs.
+In theory, relative to how much time it would take it is entirely possible given enough enough to find the input messages of all the possible 512-bit strings but the amount of time it will take to find the input is so high that it is not feasable currently to find all these possible 512-bit strings.
 
-As SHA512 is a hashing algorithm and uses multiple one-way operations sequentially with the results from the earlier operations being used in later operations[10] and when you try to reverse it to get the  
+As SHA512 requires a 128 bit input message and with this comes the limitation of of the amount of inputs that can be used by the Algorithm, although a limation exists, the size of the input messages can be of ((2^128)-1) in length or ((2^128)-2) in length if including padding which would be the equivalent of 340,282,366,920,938,463,463,374,607,431,768,211,454 bits.
+
+When then trying to compute the hash output of these maximum inputs of size 2^128 it would require 2^119 successive hash compression operations, if we take that number and and try to convert it to time in seconds it would still take longer than the current age of the universe which is roughly 13.77*10^9 years old.[11]
+
+This would similar to trying to brute force the exact inputs for a given output but in reverse as we would have to test all possible inputs for outputs and if we tried this on a pc that can try 2^40 keys per day it would take 847,904,136,496,835,804,725,427 (848 sextillion) years to compute the operation[11]
+
+In theory it is entirely possbile to find the input messages that give each of the possible 512-bit strings but when we attempt to compute the SHA 512 hash of an ipnut of size 2^128 bits long, it no longer becomes feasible due to not having enough time to compute currently.
 
 
 <h2>References</h2>
@@ -69,3 +79,4 @@ As SHA512 is a hashing algorithm and uses multiple one-way operations sequential
 8.	https://en.wikipedia.org/wiki/Birthday_attack
 9.	https://www.universetoday.com/36302/atoms-in-the-universe/#:~:text=At%20this%20level%2C%20it%20is,hundred%20thousand%20quadrillion%20vigintillion%20atoms.
 10.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
+11.	https://crypto.stackexchange.com/questions/64714/why-is-sha-512-limited-to-an-input-of-2128-bits
