@@ -67,16 +67,37 @@ This would similar to trying to brute force the exact inputs for a given output 
 
 In theory it is entirely possbile to find the input messages that give each of the possible 512-bit strings but when we attempt to compute the SHA 512 hash of an ipnut of size 2^128 bits long, it no longer becomes feasible due to not having enough time to compute currently.
 
+<h3>How difficult is it to find a hash digest beginning with at least twelve zeros?</h3>
+
+It can be very difficult when trying to find a hash digest beginning with at least twelve zeroes as when a user is trying to find a hash digest with at least 12 leading zero's, they're most likely using hashes that have been generated randomly. This is mainly seen in bitcoin mining when trying to find what is called a target hash to build a block within a blockchain. Bitcoin Miners take transaction hashes and hash them with a random variable which is a called a nonce which helps the miner get a valid has from the specific block[14][15].
+
+This nonce value is normally started with the value of 1 and then keeps incrementing until the generated hash is the desired target hash for the block to be added to the blockchain, in this case it would be a hash digest with twelve leading zero's. "Block generation is not a long, set problem (like doing a million hashes), but more like a lottery. Each hash basically gives you a random number between 0 and the maximum value of a 256-bit number (which is huge)"[16]. Because of this it can take an extremely long time to find these hash digests. if we were to attempt to find hash values with lower leading zeros like three or four leading zeroes there is a 1 in 2^8 chance of finding a hash digest with three leading zeros[17] or a 1 in 2^12 chance if finding a hash digest with four leading zeros[17]. When we attempt to to find a hash digest with twelve leading zero's there is a 1 in 2^48 chance of finding a hash digest with twhelve leading zeros[17], resulting in a long time needed to find that target hash.
+
+If solely trying to find a block for a blockchain for cryptocurrency like bitcoin a difficulty is applied a block is found faster than ten minutes or slower than ten minutes. For every 2016 blocks mined the code self adjusts depending on how fast the blocks are being mined, if its faster than 10 minutes, the difficulty is increased and the blocks require more leading zeros and if its slower than 10 minutes the difficulty is decreased and blocks with fewer leading zeros are required all to preserve an average of a new block every 10 minutes as to not deplete the total supply of bitcoin which is capped at 21 million bitcoin.
+
+Because of the increase in people trying to mine for cryptocurrenices like bitcoin, the need for finding hashes with 12 leading zeroes and above is increasing, when trying to find these hashes, there is a 1 in 2^48 chance of finding them which will could take several months to find on a standard PC.
+
+
+
+
+
+
 
 <h2>References</h2>
 1.	Ahmad, I. and Das, A.S., 2007. Analysis and detection of errors in implementation of SHA-512 algorithms on FPGAs. The computer journal, 50(6), pp.728-738<br>
 2.	https://medium.com/@zaid960928/cryptography-explaining-sha-512-ad896365a0c1<br>
-3.	Dang, Q. (2015), Secure Hash Standard, Federal Inf. Process. Stds. (NIST FIPS), National Institute of Standards and Technology, Gaithersburg, MD, [online],           https://doi.org/10.6028/NIST.FIPS.180-4 (Accessed April 23, 2021)<br>
-4.	http://www.uietkanpur.com/Online_Course/SA_CSE_S510.pdf
-5.	https://stackoverflow.com/questions/47017606/is-hashing-really-a-irreversible-process
-6.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
+3.	Dang, Q. (2015), Secure Hash Standard, Federal Inf. Process. Stds. (NIST FIPS), National Institute of Standards and Technology, Gaithersburg, MD, [online],           https://doi.org/10.6028/NIST.FIPS.180-4 (Accessed April 23, 2021)
+4.	http://www.uietkanpur.com/Online_Course/SA_CSE_S510.pdf 
+5.	https://stackoverflow.com/questions/47017606/is-hashing-really-a-irreversible-process 
+6.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes 
 7.	https://stackoverflow.com/questions/6776050/how-long-to-brute-force-a-salted-sha-512-hash-salt-provided
-8.	https://en.wikipedia.org/wiki/Birthday_attack
+8.	https://en.wikipedia.org/wiki/Birthday_attack 
 9.	https://www.universetoday.com/36302/atoms-in-the-universe/#:~:text=At%20this%20level%2C%20it%20is,hundred%20thousand%20quadrillion%20vigintillion%20atoms.
-10.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes
+10.	https://crypto.stackexchange.com/questions/45377/why-cant-we-reverse-hashes 
 11.	https://crypto.stackexchange.com/questions/64714/why-is-sha-512-limited-to-an-input-of-2128-bits
+12.	https://www.nayuki.io/page/lowest-sha512-value-by-brute-force 
+13.	https://web.archive.org/web/20171002020748/http://www.h11e.com/ 
+14.	https://creativedata.stream/bitcoin-proof-of-work/ 
+15.	https://www.javatpoint.com/blockchain-block-hashing 
+16.	https://en.bitcoin.it/wiki/Target 
+17.	https://crypto.stackexchange.com/questions/89690/sha-512-how-difficult-is-it-to-find-a-hash-digest-beginning-with-at-least-twel
