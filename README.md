@@ -1,5 +1,10 @@
 # theory-algos-project
-
+<h2>How to run the Project</h2>
+1. Clone this repository to a folder on your PC. <br>
+2. Open the project through a linux based terminal like Ubuntu or Debian. <br>
+3. Once the project has been opened on the terminal, the user is capable of using a series of ./ commands to run, test and compile the program.  <br>
+4. To compile and run the program, enter ./sha512 abc.txt, this will return a hash value of 512 bits in length. <br>
+5. To test the project, enter ./tests.sh which will return an expected hash and the actual hash for two .txt files within the file structure. <br>
 <h2>SHA512 Algorithm</h2>
 The SHA512 algorithm is a one way hashing algorithm that when given a message, processes that message and produces what is called a message or hash digest of a fixed length, for SHA 512 this is of 512 bits in length. "This property is useful in the generation and verification of digital signatures and message authentication codes, and in the generation of random numbers or bits."[3]
 <br>
