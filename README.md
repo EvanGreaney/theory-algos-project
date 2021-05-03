@@ -1,10 +1,17 @@
 # theory-algos-project
+
+<h2>Description</h2>
+For this Project I was tasked with with creating a program in the C programming language to calculate the SHA512 value of an input file. It must take the name or path of the file as a command line argument and output the SHA512 digest of it. <br>
+The project itself is capable of taking in an input message of 128 bits in length and is then processed through the sha512 algorithm to produce a 512 bit output string.<br>
+The program is able to compile using gcc and contains Makefile which compiles it upon make being called in the project folder. The Project also includes tests which run upon make test being called.
+
 <h2>How to run the Project</h2>
 1. Clone this repository to a folder on your PC. <br>
 2. Open the project through a linux based terminal like Ubuntu or Debian. <br>
 3. Once the project has been opened on the terminal, the user is capable of using a series of ./ commands to run, test and compile the program.  <br>
-4. To compile and run the program, enter ./sha512 abc.txt, this will return a hash value of 512 bits in length. <br>
-5. To test the project, enter ./tests.sh which will return an expected hash and the actual hash for two .txt files within the file structure. <br>
+4. To compile the program run the command gcc sha512.c
+5. To run the program, enter ./sha512 abc.txt, this will return a hash value of 512 bits in length. <br>
+6. To test the project, enter ./tests.sh which will return an expected hash and the actual hash for two .txt files within the file structure. <br>
 <h2>SHA512 Algorithm</h2>
 The SHA512 algorithm is a one way hashing algorithm that when given a message, processes that message and produces what is called a message or hash digest of a fixed length, for SHA 512 this is of 512 bits in length. "This property is useful in the generation and verification of digital signatures and message authentication codes, and in the generation of random numbers or bits."[3]
 <br>
@@ -81,12 +88,6 @@ This nonce value is normally started with the value of 1 and then keeps incremen
 If solely trying to find a block for a blockchain for cryptocurrency like bitcoin a difficulty is applied a block is found faster than ten minutes or slower than ten minutes. For every 2016 blocks mined the code self adjusts depending on how fast the blocks are being mined, if its faster than 10 minutes, the difficulty is increased and the blocks require more leading zeros and if its slower than 10 minutes the difficulty is decreased and blocks with fewer leading zeros are required all to preserve an average of a new block every 10 minutes as to not deplete the total supply of bitcoin which is capped at 21 million bitcoin.
 
 Because of the increase in people trying to mine for cryptocurrenices like bitcoin, the need for finding hashes with 12 leading zeroes and above is increasing, when trying to find these hashes, there is a 1 in 2^48 chance of finding them which will could take several months to find on a standard PC.
-
-
-
-
-
-
 
 <h2>References</h2>
 1.	Ahmad, I. and Das, A.S., 2007. Analysis and detection of errors in implementation of SHA-512 algorithms on FPGAs. The computer journal, 50(6), pp.728-738<br>
